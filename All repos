@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Replace 'YOUR_GITHUB_TOKEN' with your actual GitHub token
+GITHUB_TOKEN="YOUR_GITHUB_TOKEN"
+
+# API endpoint for listing repositories
+API_URL="https://api.github.com/user/repos"
+
+# Send a GET request using curl
+response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "$API_URL")
+
+# Extract repository names from the JSON response
+repo_names=$(echo "$response" | jq -r '.[].name')
+
+# Print the repository names
+echo "Repositories:"
+echo "$repo_names"
